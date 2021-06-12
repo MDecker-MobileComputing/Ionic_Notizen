@@ -43,7 +43,7 @@ export class FirebaseService {
 
 
   /**
-   * Neuen Nutzer mit Email-Adresse und Passwort gelesen.
+   * Neuen Nutzer mit Email-Adresse und Passwort gelesen; es wird auch die Verifikations-Email verschickt
    * 
    * @return Promise auf bool'schen Wert; wenn `true`, dann war die Registrierung erfolgreich.
    */
@@ -52,6 +52,9 @@ export class FirebaseService {
     try {
 
       const userCredential = await this.firebaseAuth.createUserWithEmailAndPassword(email, passwort);
+
+      userCredential.user.sendEmailVerification();
+
       return userCredential.user !== null;  
     }
     catch (fehler) {
@@ -61,6 +64,11 @@ export class FirebaseService {
     }
   }
 
+
+  /**
+   * Aktuellen angemeldeten Nutzer abfragen.
+   * @returns  Nutzerobjekt oder `null` wenn nicht angemeldet.
+   */
   public async getNutzer(): Promise<firebase.User> {
 
      const nutzerObservable = this.firebaseAuth.user;
