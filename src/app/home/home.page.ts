@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AlertController } from '@ionic/angular';
 import firebase from  'firebase/app';
 
 /**
@@ -18,7 +19,8 @@ export class HomePage {
   /**
    * Konstruktor für Dependency Injection.
    */
-  constructor(public firebaseAuth: AngularFireAuth) {}
+  constructor(public firebaseAuth: AngularFireAuth,
+              public alertController: AlertController) {}
 
 
   /**
@@ -33,12 +35,38 @@ export class HomePage {
     //this.firebaseAuth.signInWithRedirect(googleAuthProvider);
   }
 
+
   /**
-   * Event-Handler für Button "Logout".
+   * Event-Handler für Button "Logout"; zeigt zunächst eine Sicherheitsabfrage an.
    */
-  public onLogoutButton() {
+  public async onLogoutButton() {
+
+    const alert = await this.alertController.create({
+      header: "Sicherheitsfrage",
+      message: "Wollen Sie sich wirklich abmelden?",
+      buttons: [
+        {
+          text: "Nein",
+          role: 'cancel'
+        }, {
+          text: "Ja",
+          handler: () => { this.ausloggen(); }
+        }
+      ]
+    });
+
+    await alert.present();    
+  }
+
+
+  /**
+   * Methode für Durchführung Logout nach Bestätigung der Sicherheitsabfrage.
+   */
+  public ausloggen() {
 
     this.firebaseAuth.signOut();
   }  
+
+  
 
 }
