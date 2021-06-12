@@ -8,7 +8,7 @@
 
   <div *ngIf="firebaseAuth.user | async as nutzer; else zeigeLogin">
 
-    <p>Sie sind angemeldet als {{nutzer.displayName}}.</p>
+    <p>Sie sind angemeldet als {{nutzer.displayName}} ({{nutzer.email}}).</p>
     &nbsp;
     <ion-button expand="block" (click)="onLogoutButton()">Ausloggen ...</ion-button>    
 
