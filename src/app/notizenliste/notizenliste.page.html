@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Notizen</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div *ngIf="firebaseService.getNutzer() | async as nutzer; else nichtAngemeldet">
+
+    <p>Sie sind angemeldet als {{nutzer.displayName}} ({{nutzer.email}}).</p>
+
+  </div>
+  <ng-template #nichtAngemeldet>
+
+    <p>Sie sind derzeit nicht angemeldet.</p>
+
+  </ng-template>
+
+</ion-content>

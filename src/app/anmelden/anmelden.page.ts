@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FirebaseService } from '../firebase.service';
 import { HelferleinService } from '../helferlein.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-anmelden',
@@ -19,7 +20,8 @@ export class AnmeldenPage  {
    * Konstruktor für Dependency Injection
    */
   constructor(public firebaseService: FirebaseService,
-              public helferlein: HelferleinService ) { }
+              public helferlein: HelferleinService,
+              private navController  : NavController ) { }
 
 
   /**
@@ -42,11 +44,12 @@ export class AnmeldenPage  {
     if (anmeldungErfolgreich) {
 
       this.helferlein.zeigeToast("Anmeldung war erfolgreich!");
+      this.navController.navigateForward("/notizenliste");
 
     } else {
 
       this.helferlein.zeigeDialog("Fehler", "Anmeldung ist fehlgeschlagen.");
-    }
+    }    
   }
 
 }
