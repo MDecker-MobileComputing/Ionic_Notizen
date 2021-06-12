@@ -19,7 +19,8 @@ import { environment } from '../environments/environment';
   imports: [BrowserModule,
             IonicModule.forRoot(),
             AppRoutingModule,
-            AngularFireModule.initializeApp(environment.firebase)],
+            AngularFireModule.initializeApp(environment.firebase)
+          ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

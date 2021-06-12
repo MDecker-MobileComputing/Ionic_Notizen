@@ -22,6 +22,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
+            <!--
+                 Eine Activity kann mehr als einen Intent-Filter haben, siehe https://stackoverflow.com/a/13795834
+                 Lösung nach https://stackoverflow.com/a/65659804
+              -->
+            <!--
+            <intent-filter>
+              <action android:name="android.intent.action.VIEW" />
+              <category android:name="android.intent.category.DEFAULT" />
+              <category android:name="android.intent.category.BROWSABLE" />
+              <data android:scheme="https"
+                android:host="notizen-mit-firestore.firebaseapp.com" />
+            </intent-filter>
+            -->
         </activity>
 
         <provider
@@ -38,4 +51,5 @@
     <!-- Permissions -->
 
     <uses-permission android:name="android.permission.INTERNET" />
+
 </manifest>
