@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Anmelden</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-item>
+    <ion-label position="fixed">Email</ion-label>
+    <ion-input type="text" [(ngModel)]="emailAdresse"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="fixed">Passwort</ion-label>
+    <ion-input type="text" [(ngModel)]="passwort"></ion-input>
+  </ion-item>
+
+  &nbsp;
+
+  <ion-button expand="block" (click)="onAnmeldenButton()">Anmelden</ion-button>
+
+  &nbsp;
+
+  <ion-button expand="block" href="/home" routerDirection="backward">Zurück</ion-button>
+
+</ion-content>

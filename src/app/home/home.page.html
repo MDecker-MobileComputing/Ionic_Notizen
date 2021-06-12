@@ -6,22 +6,21 @@
 
 <ion-content [fullscreen]="true">
 
-  <div *ngIf="firebaseAuth.user | async as nutzer; else zeigeLogin">
+  <div *ngIf="firebaseService.getNutzer() | async as nutzer; else nichtAngemeldet">
 
     <p>Sie sind angemeldet als {{nutzer.displayName}} ({{nutzer.email}}).</p>
 
-    &nbsp;
-
-    <ion-button expand="block" (click)="onLogoutButton()">Ausloggen ...</ion-button>
-
   </div>
-  <ng-template #zeigeLogin>
+  <ng-template #nichtAngemeldet>
 
-    <p>Sie sind noch nicht angemeldet.</p>
+    <p>Sie sind derzeit nicht angemeldet.</p>
 
     &nbsp;
 
-    <ion-button expand="block" (click)="onLoginButton()">Einloggen ...</ion-button>
+    <ion-button expand="block" href="/anmelden" routerDirection="forward">Anmelden</ion-button>
+
+    <ion-button expand="block" href="/registrieren" routerDirection="forward">Registrieren</ion-button>
+
 
   </ng-template>
 
