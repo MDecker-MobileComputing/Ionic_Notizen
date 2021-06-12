@@ -2,8 +2,19 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+/*
+ * Konfiguration nach https://github.com/angular/angularfire/blob/master/docs/install-and-setup.md
+ */
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: "<API-KEY-EINTRAGEN>",
+    authDomain: "notizen-mit-firestore.firebaseapp.com",
+    projectId: "notizen-mit-firestore",
+    storageBucket: "notizen-mit-firestore.appspot.com",
+    messagingSenderId: "1004777408815",
+    appId: "<APP_ID_EINTRAGEN>"
+  }
 };
 
 /*
