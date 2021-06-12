@@ -28,10 +28,10 @@ export class HomePage {
    * Nachdem Nutzer eingeloggt ist wird in Firebase-Console unter dem jeweiligen Firebase-Projekt
    * unter "Authentication | Users" aufgelistet.
    */
-  public onLoginButton() {
+  public async onLoginButton() {
 
     const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
-    this.firebaseAuth.signInWithPopup(googleAuthProvider);
+    await this.firebaseAuth.signInWithPopup(googleAuthProvider);
     //this.firebaseAuth.signInWithRedirect(googleAuthProvider);
   }
 
