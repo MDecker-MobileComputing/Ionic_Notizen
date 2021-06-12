@@ -4,7 +4,32 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
+
+  <ion-item>
+    <ion-label position="fixed">Email</ion-label>
+    <ion-input type="text" 
+               [(ngModel)]="emailAdresse"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="fixed">Passwort</ion-label>
+    <ion-input type="password" 
+               placeholder="Mindestens 8 Zeichen"
+               [(ngModel)]="passwort1"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="fixed">Passwort</ion-label>
+    <ion-input type="password" 
+               placeholder="Wiederholung des Passworts"
+               [(ngModel)]="passwort2"></ion-input>
+  </ion-item>
+
+
+  &nbsp;
+
+  <ion-button expand="block" (click)="onRegistierenButton()">Registrieren</ion-button>  
 
   <ion-button expand="block" href="/home" routerDirection="backward">Zurück</ion-button>
 

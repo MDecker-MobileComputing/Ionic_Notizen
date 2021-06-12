@@ -21,8 +21,11 @@ export class FirebaseService {
 
   /**
    * Nutzer anhand von Email-Adresse und Passwort anmelden.
+   * 
    * @param email  Vom Nutzer eingegebene Email-Adresse
    * @param passwort Vom Nutzer eingegebenes Passwort
+   * 
+   * @return Promise auf bool'schen Wert; wenn `true`, dann war die Anmeldung erfolgreich.
    */
   public async anmelden(email: string, passwort: string): Promise<boolean> {
 
@@ -32,6 +35,27 @@ export class FirebaseService {
       return userCredential.user !== null;  
     }
     catch (fehler) {
+
+      console.log(`Fehler bei Anmeldung: ${fehler}`);
+      return false;
+    }
+  }
+
+
+  /**
+   * Neuen Nutzer mit Email-Adresse und Passwort gelesen.
+   * 
+   * @return Promise auf bool'schen Wert; wenn `true`, dann war die Registrierung erfolgreich.
+   */
+  public async registrieren(email: string, passwort: string): Promise<boolean> {
+
+    try {
+
+      const userCredential = await this.firebaseAuth.createUserWithEmailAndPassword(email, passwort);
+      return userCredential.user !== null;  
+    }
+    catch (fehler) {
+
       console.log(`Fehler bei Anmeldung: ${fehler}`);
       return false;
     }
