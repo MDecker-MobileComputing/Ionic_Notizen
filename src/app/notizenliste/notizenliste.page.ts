@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { FirebaseService } from '../firebase.service';
 
 @Component({
@@ -10,8 +11,19 @@ export class NotizenlistePage {
 
   /**
    * Konstruktor für Dependency Injection.
-   */  
-   constructor(public firebaseService: FirebaseService) {}
+   */
+   constructor(public firebaseService: FirebaseService,
+               public navCtrl: NavController) {}
 
+
+   /**
+    * Event-Handler-Methode für Button "Abmelden".
+    */
+   public async onAbmeldenButton() {
+
+      await this.firebaseService.abmelden();
+
+      this.navCtrl.navigateForward("/home");
+   }
 
 }
