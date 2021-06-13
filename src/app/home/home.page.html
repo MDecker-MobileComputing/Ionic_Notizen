@@ -10,7 +10,11 @@
     
     <p>Sie sind angemeldet als {{firebaseService.nutzername}}.</p>
 
+    &nbsp;
+
     <ion-button expand="block" href="/notizenliste" routerDirection="forward" color="primary">Liste der Notizen</ion-button>
+
+    &nbsp;
 
     <ion-button expand="block" (click)="firebaseService.abmelden()" color="danger">Abmelden</ion-button>
 
@@ -22,6 +26,8 @@
     &nbsp;
 
     <ion-button expand="block" href="/anmelden" routerDirection="forward" color="primary">Anmelden</ion-button>
+
+    &nbsp;
 
     <ion-button expand="block" href="/registrieren" routerDirection="forward" color="secondary">Registrieren</ion-button>
 

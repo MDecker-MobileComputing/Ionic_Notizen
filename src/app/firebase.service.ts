@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { first } from 'rxjs/operators';
 
 /**
  * Service-Klasse, die alle Firebase-spezifischen Funktionen (Authentifizierung, Zugriff auf Firestore) kapselt.
@@ -39,7 +40,7 @@ export class FirebaseService {
         this.istNutzerAngemeldet = true;
         this.nutzername          = user.email;
         this.nutzerUid           = user.uid;
-        console.log(`Nutzer angemeldet; Email-Adresse bestätigt: ${user.emailVerified}`);
+        console.log(`Nutzer angemeldet: Email-Adresse bestätigt: ${user.emailVerified}, nutzerUid=${this.nutzerUid}`);
 
       } else {
 
@@ -133,10 +134,18 @@ export class FirebaseService {
 
   /**
    * Methode holt alle Notizen für aktuellen Nutzer.
+   * 
+   * Die Nutzer-ID für die `WHERE`-Bedingung kann nicht aus der Member-Variable `nutzerUid` ausgelesen
+   * werden, weil diese zum Zeitpunkt des Aufrufs dieses Methode wahrscheinlich noch nicht gefüllt ist.
+   * Es wird deshalb vor der Query die User-ID separat abgefragt.
    */
   public async alleNotizenHolen() {
 
-    this.firestore.collection("notizensammlung")
+    const authStatePromise = this.firebaseAuth.authState.pipe( first() ).toPromise();
+    const authState = await authStatePromise;
+    const nutzerUid = authState.uid;
+
+    this.firestore.collection("notizensammlung", ref => ref.where("nutzer_uid", "==", nutzerUid) )
                   .valueChanges({ idField: 'id' }) // https://stackoverflow.com/a/59902473
                   .subscribe( notiz => { console.log(notiz) } );                  
   }
