@@ -36,7 +36,7 @@ export class FirebaseService {
 
         this.istNutzerAngemeldet = true;
         this.nutzername          = user.email;
-        console.log("Nutzer angemeldet.");
+        console.log(`Nutzer angemeldet; Email-Adresse bestätigt: ${user.emailVerified}`);
 
       } else {
 
