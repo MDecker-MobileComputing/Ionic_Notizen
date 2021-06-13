@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { FirebaseService } from '../firebase.service';
 
@@ -7,7 +7,7 @@ import { FirebaseService } from '../firebase.service';
   templateUrl: './notizenliste.page.html',
   styleUrls: ['./notizenliste.page.scss'],
 })
-export class NotizenlistePage implements OnInit {
+export class NotizenlistePage  {
 
   /**
    * Konstruktor für Dependency Injection.
@@ -26,9 +26,9 @@ export class NotizenlistePage implements OnInit {
       this.navCtrl.navigateForward("/home");
    }
 
-
-   public ngOnInit() {
+   public async notizenHolen() {
 
     this.firebaseService.alleNotizenHolen();
    }
+
 }

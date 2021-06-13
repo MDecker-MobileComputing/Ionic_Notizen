@@ -8,6 +8,8 @@ import { first } from 'rxjs/operators';
  * Service-Klasse, die alle Firebase-spezifischen Funktionen (Authentifizierung, Zugriff auf Firestore) kapselt.
  *
  * Siehe auch: https://www.positronx.io/ionic-firebase-authentication-tutorial-with-examples/
+ * 
+ * Für Konfiguration der Zugriffsregel für Firestore: siehe README-Datei dieses Repos.
  */
 @Injectable({
   providedIn: 'root'
@@ -133,7 +135,7 @@ export class FirebaseService {
   }  
 
   /**
-   * Methode holt alle Notizen für aktuellen Nutzer.
+   * Methode holt alle Notizen für den aktuellen Nutzer.
    * 
    * Die Nutzer-ID für die `WHERE`-Bedingung kann nicht aus der Member-Variable `nutzerUid` ausgelesen
    * werden, weil diese zum Zeitpunkt des Aufrufs dieses Methode wahrscheinlich noch nicht gefüllt ist.
@@ -141,12 +143,15 @@ export class FirebaseService {
    */
   public async alleNotizenHolen() {
 
+    // Lösung nach https://fireship.io/snippets/get-angularfire-userid-as-promise/
     const authStatePromise = this.firebaseAuth.authState.pipe( first() ).toPromise();
     const authState = await authStatePromise;
     const nutzerUid = authState.uid;
 
+    console.log(`nutzer_uid=${nutzerUid}`);
+
     this.firestore.collection("notizensammlung", ref => ref.where("nutzer_uid", "==", nutzerUid) )
-                  .valueChanges({ idField: 'id' }) // https://stackoverflow.com/a/59902473
+                  .valueChanges( { idField: 'id' } ) // https://stackoverflow.com/a/59902473
                   .subscribe( notiz => { console.log(notiz) } );                  
   }
 
