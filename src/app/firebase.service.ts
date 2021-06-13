@@ -29,6 +29,7 @@ export class FirebaseService {
   /** Array mit von der DB gelesenen Notizen. */
   public notizenArray: Notiz[] = [];
 
+
   /**
    * Konstruktor für Dependency Injection.
    *
@@ -109,7 +110,7 @@ export class FirebaseService {
 
 
   /**
-   * Nutzer ausloggen.
+   * Nutzer abmelden (ausloggen).
    */
   public async abmelden() {
 
@@ -139,6 +140,7 @@ export class FirebaseService {
     console.log(`Neue Notiz wurde angelegt: ID=${documentReference.id}, Pfad=${documentReference.path}`);
   }
 
+
   /**
    * Methode holt alle Notizen für den aktuellen Nutzer.
    *
@@ -159,7 +161,10 @@ export class FirebaseService {
 
     // Der Methode valuesChanges() muss ein Argument übergeben werden, damit die ID-Werte
     // der Datensätze/Dokumente zurückgegeben werden ( https://stackoverflow.com/a/59902473 ).
-    this.firestore.collection("notizensammlung", ref => ref.where("nutzer_uid", "==", nutzerUid) )
+    //
+    // Für das orderBy() muss folgender Index für die Collection "notizensammlung" angelegt werden:
+    // nutzer_uid Aufsteigend zeitstempel Aufsteigend
+    this.firestore.collection("notizensammlung", ref => ref.where("nutzer_uid", "==", nutzerUid).orderBy("zeitstempel") )
                   .valueChanges( { idField: "id" } )
                   .subscribe( notizenArray => {
 

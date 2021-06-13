@@ -28,8 +28,13 @@ service cloud.firestore {
   }
 }
 ```
-
 Solution according to [this answer on SO](https://stackoverflow.com/a/55115937)
+
+<br>
+
+Create an Index on collection `notizensammlung` for the following fields:
+* `nutzer_uid` ascending
+* `zeitstempel` ascending
 
 <br>
 
