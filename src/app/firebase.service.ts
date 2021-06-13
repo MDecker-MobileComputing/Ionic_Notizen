@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 /**
  * Service-Klasse, die alle Firebase-spezifischen Funktionen (Authentifizierung, Zugriff auf Firestore) kapselt.
@@ -24,10 +25,11 @@ export class FirebaseService {
   /**
    * Konstruktor für Dependency Injection.
    *
-   * Subscribed auch den Authentication State nach
+   * Definiert auch eine Callback-Methode für Änderungen des Authentication-Status, siehe auch
    * https://www.positronx.io/ionic-firebase-authentication-tutorial-with-examples/
    */
-  constructor(public firebaseAuth: AngularFireAuth) {
+  constructor(public firebaseAuth: AngularFireAuth,
+              private firestore: AngularFirestore) {
 
     this.firebaseAuth.authState.subscribe(user => {
 

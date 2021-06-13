@@ -10,15 +10,15 @@
 
     <p>Sie sind angemeldet als {{ firebaseService.nutzername }}.</p>
 
+    &nbsp;
+
+    <ion-button expand="block" (click)="onAbmeldenButton()">Abmelden</ion-button>
+  
   </div>
   <ng-template #nichtAngemeldet>
 
     <p>Sie sind derzeit nicht angemeldet.</p>
 
   </ng-template>
-
-  &nbsp;
-
-  <ion-button expand="block" (click)="onAbmeldenButton()">Abmelden</ion-button>
 
 </ion-content>
