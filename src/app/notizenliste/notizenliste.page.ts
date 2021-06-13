@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { FirebaseService } from '../firebase.service';
 
@@ -7,7 +7,7 @@ import { FirebaseService } from '../firebase.service';
   templateUrl: './notizenliste.page.html',
   styleUrls: ['./notizenliste.page.scss'],
 })
-export class NotizenlistePage  {
+export class NotizenlistePage implements OnInit {
 
   /**
    * Konstruktor für Dependency Injection.
@@ -15,6 +15,11 @@ export class NotizenlistePage  {
    constructor(public firebaseService: FirebaseService,
                public navCtrl: NavController) {}
 
+
+   public ngOnInit() {
+
+    this.firebaseService.alleNotizenHolen();
+   }
 
    /**
     * Event-Handler-Methode für Button "Abmelden".
@@ -24,11 +29,6 @@ export class NotizenlistePage  {
       await this.firebaseService.abmelden();
 
       this.navCtrl.navigateForward("/home");
-   }
-
-   public async notizenHolen() {
-
-    this.firebaseService.alleNotizenHolen();
    }
 
 }

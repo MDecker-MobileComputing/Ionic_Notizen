@@ -8,7 +8,11 @@
 
   <div *ngIf="firebaseService.istNutzerAngemeldet === true; else nichtAngemeldet">
 
-    <p>Sie sind angemeldet als {{ firebaseService.nutzername }}.</p>
+    <p>Sie sind angemeldet als <i>{{firebaseService.nutzername}}</i>.</p>
+
+    &nbsp;
+
+    <p>Anzahl Notizen: {{firebaseService.notizenArray.length}}</p>
 
     &nbsp;
 
@@ -17,14 +21,8 @@
         <ion-card-title>{{notiz.titel}}</ion-card-title>
         <ion-card-subtitle>Angelegt am: {{notiz.getDatumZeitErzeugung()}}</ion-card-subtitle>
       </ion-card-header>
-      <ion-card-content>
-        {{notiz.inhalt}}
-      </ion-card-content>
+      <ion-card-content>{{notiz.inhalt}}</ion-card-content>
     </ion-card>
-
-    &nbsp;
-
-    <ion-button expand="block" (click)="notizenHolen()">Notizen holen</ion-button>
 
     &nbsp;
 

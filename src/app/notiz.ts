@@ -8,6 +8,12 @@ export class Notiz {
                 public inhalt: string,
                 public zeitstempel: number) {}
 
+
+    /**
+     * Datum der Erzeugung der Notiz, 13.6.2021.
+     *
+     * @returns Datum zum Anzeigen.
+     */
     public getDatumZeitErzeugung(): string {
 
         const date = new Date(this.zeitstempel);
