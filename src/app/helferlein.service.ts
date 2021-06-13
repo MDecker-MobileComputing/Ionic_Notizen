@@ -12,20 +12,21 @@ export class HelferleinService {
 
   /**
    * Konstruktor für Dependency Injection.
-   */    
-  constructor(public alertController: AlertController,              
+   */
+  constructor(public alertController: AlertController,
               public toastController: ToastController) {}
 
 
   /**
    * Hilfsmethode zum Anzeigen einer Nachricht in einem Toast-Objekt.
-   * 
+   *
    * @param nachricht Text, der in Toast-Objekt angezeigt wird.
    */
    public async zeigeToast(nachricht: string)  {
 
       const toast = await this.toastController.create({
         message: nachricht,
+        duration: 2000
       });
 
       await toast.present();
@@ -34,7 +35,7 @@ export class HelferleinService {
 
   /**
    * Hilfsmethode zum Anzeigen einer Nachrichten in einem Dialog.
-   * 
+   *
    * @param titel  Überschrift des Dialogs.
    * @param nachricht  Eigentliche Nachricht des Dialogs.
    */
@@ -47,5 +48,5 @@ export class HelferleinService {
       });
 
       await alert.present();
-  }  
+  }
 }
