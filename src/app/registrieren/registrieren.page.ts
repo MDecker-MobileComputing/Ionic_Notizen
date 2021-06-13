@@ -54,7 +54,7 @@ export class RegistrierenPage {
     }
 
     const passwort1Trimmed = this.passwort1.trim();
-    const passwort2Trimmed = this.passwort1.trim();
+    const passwort2Trimmed = this.passwort2.trim();
 
     if (passwort1Trimmed.length === 0) {
 

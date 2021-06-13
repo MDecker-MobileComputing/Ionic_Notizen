@@ -6,9 +6,13 @@
 
 <ion-content [fullscreen]="true">
 
-  <div *ngIf="firebaseService.getNutzer() | async as nutzer; else nichtAngemeldet">
+  <div *ngIf="firebaseService.istNutzerAngemeldet; else nichtAngemeldet">
+    
+    <p>Sie sind angemeldet als {{firebaseService.nutzername}}.</p>
 
-    <p>Sie sind angemeldet als {{nutzer.displayName}} ({{nutzer.email}}).</p>
+    <ion-button expand="block" href="/notizenliste" routerDirection="forward" color="primary">Liste der Notizen</ion-button>
+
+    <ion-button expand="block" color="danger" (click)="firebaseService.abmelden()">Abmelden</ion-button>
 
   </div>
   <ng-template #nichtAngemeldet>

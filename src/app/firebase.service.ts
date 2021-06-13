@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFireAuth } from '@angular/fire/auth';
-import firebase from 'firebase/app';
 
 /**
  * Service-Klasse, die alle Firebase-spezifischen Funktionen (Authentifizierung, Zugriff auf Firestore) kapselt.
@@ -13,7 +12,14 @@ import firebase from 'firebase/app';
 })
 export class FirebaseService {
 
-  public userObject: any;
+  public nutzerObjekt: any;
+
+  /** Member-Variable, hat Wert `true` gdw. wenn gerade ein Nutzer angemeldet ist. */
+  public istNutzerAngemeldet = false;
+
+  /** Anzeigename des aktuell angemeldeten Benutzers oder leerer String. */
+  public nutzername = "";
+
 
   /**
    * Konstruktor für Dependency Injection.
@@ -25,11 +31,23 @@ export class FirebaseService {
 
     this.firebaseAuth.authState.subscribe(user => {
 
-      const userStr = JSON.stringify(user);
+      this.nutzerObjekt = user;
+      if (user !== null) {
 
+        this.istNutzerAngemeldet = true;
+        this.nutzername          = user.email;
+        console.log("Nutzer angemeldet.");
+
+      } else {
+
+        this.istNutzerAngemeldet = false;
+        this.nutzername          = "";
+        console.log("Kein Nutzer angemeldet.");
+      }
+
+      const userStr = JSON.stringify(user);
       console.log(`Neuer Auth-Status: ${userStr}`);
     });
-
   }
 
 
@@ -80,15 +98,8 @@ export class FirebaseService {
 
 
   /**
-   * Aktuellen angemeldeten Nutzer abfragen.
-   * @returns  Nutzerobjekt oder `null` wenn nicht angemeldet.
+   * Nutzer ausloggen.
    */
-  public async getNutzer(): Promise<firebase.User> {
-
-     const nutzerObservable = this.firebaseAuth.user;
-     return nutzerObservable.toPromise();
-  }
-
   public async abmelden() {
 
     this.firebaseAuth.signOut();
