@@ -13,7 +13,8 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 })
 export class FirebaseService {
 
-  public nutzerObjekt: any;
+  /** Eindeutige ID des derzeit angemeldeten Nutzer oder leerer String, wenn niemand angemeldet ist. */
+  public nutzerUid = "";
 
   /** Member-Variable, hat Wert `true` gdw. wenn gerade ein Nutzer angemeldet ist. */
   public istNutzerAngemeldet = false;
@@ -33,11 +34,11 @@ export class FirebaseService {
 
     this.firebaseAuth.authState.subscribe(user => {
 
-      this.nutzerObjekt = user;
       if (user !== null) {
 
         this.istNutzerAngemeldet = true;
         this.nutzername          = user.email;
+        this.nutzerUid           = user.uid;
         console.log(`Nutzer angemeldet; Email-Adresse bestätigt: ${user.emailVerified}`);
 
       } else {
@@ -106,5 +107,20 @@ export class FirebaseService {
 
     this.firebaseAuth.signOut();
   }
+
+
+  public async neueNotizAnlegen(titel: string, inhalt: string) {
+
+    let nowMillisecondsSince1970 = new Date().valueOf();
+
+    let documentReference = await this.firestore.collection("notizensammlung").add({
+      nutzer_uid: this.nutzerUid,
+      titel: titel,
+      inhalt: inhalt,
+      zeitstempel: nowMillisecondsSince1970
+    });
+
+    console.log(`Neue Notiz wurde angelegt: ID=${documentReference.id}, Pfad=${documentReference.path}`);
+  }  
 
 }

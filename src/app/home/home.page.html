@@ -6,7 +6,7 @@
 
 <ion-content [fullscreen]="true">
 
-  <div *ngIf="firebaseService.istNutzerAngemeldet; else nichtAngemeldet">
+  <div *ngIf="firebaseService.istNutzerAngemeldet === true; else nichtAngemeldet">
     
     <p>Sie sind angemeldet als {{firebaseService.nutzername}}.</p>
 

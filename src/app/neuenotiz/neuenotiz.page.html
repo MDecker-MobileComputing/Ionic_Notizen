@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Neue Notiz anlegen</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <p>Sie sind angemeldet als {{firebaseService.nutzername}}.</p>
+
+  &nbsp;
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label position="floating">Titel:</ion-label>
+      <ion-input type="text" [(ngModel)]="notizTitel"></ion-input>      
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Notiz:</ion-label>
+      <ion-textarea rows="5" [(ngModel)]="notizBody"></ion-textarea>
+    </ion-item>
+  </ion-list>  
+
+  &nbsp;
+
+  <ion-button expand="block" (click)="onNotizAnlegenButton()">Notiz anlegen</ion-button>
+
+</ion-content>
