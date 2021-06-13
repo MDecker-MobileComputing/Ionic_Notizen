@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { first } from 'rxjs/operators';
+import { Notiz } from './notiz';
 
 /**
  * Service-Klasse, die alle Firebase-spezifischen Funktionen (Authentifizierung, Zugriff auf Firestore) kapselt.
  *
  * Siehe auch: https://www.positronx.io/ionic-firebase-authentication-tutorial-with-examples/
- * 
+ *
  * Für Konfiguration der Zugriffsregel für Firestore: siehe README-Datei dieses Repos.
  */
 @Injectable({
@@ -25,6 +26,8 @@ export class FirebaseService {
   /** Anzeigename des aktuell angemeldeten Benutzers oder leerer String. */
   public nutzername = "";
 
+  /** Array mit von der DB gelesenen Notizen. */
+  public notizenArray: Notiz[] = [];
 
   /**
    * Konstruktor für Dependency Injection.
@@ -51,8 +54,10 @@ export class FirebaseService {
         console.log("Kein Nutzer angemeldet.");
       }
 
+      /*
       const userStr = JSON.stringify(user);
       console.log(`Neuer Auth-Status: ${userStr}`);
+      */
     });
   }
 
@@ -116,7 +121,7 @@ export class FirebaseService {
    * Legt eine neue Notiz in der Collection "notizensammlung" an; neben den als Argument übergebenen
    * `titel` und `inhalt` werden noch der aktuelle Zeitstempel als Anzahl Millisekunden seit dem
    * 1. Januar 1970 sowie die Nutzer-ID abgespeichert.
-   * 
+   *
    * @param titel   Titel der Notiz
    * @param inhalt  Eigentlicher Text der Notiz.
    */
@@ -132,27 +137,40 @@ export class FirebaseService {
     });
 
     console.log(`Neue Notiz wurde angelegt: ID=${documentReference.id}, Pfad=${documentReference.path}`);
-  }  
+  }
 
   /**
    * Methode holt alle Notizen für den aktuellen Nutzer.
-   * 
+   *
    * Die Nutzer-ID für die `WHERE`-Bedingung kann nicht aus der Member-Variable `nutzerUid` ausgelesen
    * werden, weil diese zum Zeitpunkt des Aufrufs dieses Methode wahrscheinlich noch nicht gefüllt ist.
    * Es wird deshalb vor der Query die User-ID separat abgefragt.
    */
   public async alleNotizenHolen() {
 
+    this.notizenArray = [];
+
     // Lösung nach https://fireship.io/snippets/get-angularfire-userid-as-promise/
     const authStatePromise = this.firebaseAuth.authState.pipe( first() ).toPromise();
     const authState = await authStatePromise;
     const nutzerUid = authState.uid;
 
-    console.log(`nutzer_uid=${nutzerUid}`);
+    //console.log(`nutzer_uid=${nutzerUid}`);
 
+    // Der Methode valuesChanges() muss ein Argument übergeben werden, damit die ID-Werte
+    // der Datensätze/Dokumente zurückgegeben werden ( https://stackoverflow.com/a/59902473 ).
     this.firestore.collection("notizensammlung", ref => ref.where("nutzer_uid", "==", nutzerUid) )
-                  .valueChanges( { idField: 'id' } ) // https://stackoverflow.com/a/59902473
-                  .subscribe( notiz => { console.log(notiz) } );                  
+                  .valueChanges( { idField: "id" } )
+                  .subscribe( notizenArray => {
+
+                    for (let i = 0; i < notizenArray.length; i++) {
+
+                      const element = notizenArray[i];
+
+                      const notizObj = new Notiz(element["titel"], element["inhalt"], element["zeitstempel"]);
+                      this.notizenArray.push(notizObj);
+                    }
+                  } );
   }
 
 }

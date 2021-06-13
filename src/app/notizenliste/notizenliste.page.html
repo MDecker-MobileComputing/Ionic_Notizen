@@ -12,6 +12,18 @@
 
     &nbsp;
 
+    <ion-card *ngFor="let notiz of firebaseService.notizenArray">
+      <ion-card-header>
+        <ion-card-title>{{notiz.titel}}</ion-card-title>
+        <ion-card-subtitle>Angelegt am: {{notiz.getDatumZeitErzeugung()}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        {{notiz.inhalt}}
+      </ion-card-content>
+    </ion-card>
+
+    &nbsp;
+
     <ion-button expand="block" (click)="notizenHolen()">Notizen holen</ion-button>
 
     &nbsp;
@@ -21,7 +33,9 @@
     &nbsp;
 
     <ion-button expand="block" (click)="onAbmeldenButton()" color="danger">Abmelden</ion-button>
-  
+
+    &nbsp;
+
   </div>
   <ng-template #nichtAngemeldet>
 
