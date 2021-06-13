@@ -29,7 +29,7 @@ export class FirebaseService {
    * Definiert auch eine Callback-Methode für Änderungen des Authentication-Status, siehe auch
    * https://www.positronx.io/ionic-firebase-authentication-tutorial-with-examples/
    */
-  constructor(public firebaseAuth: AngularFireAuth,
+  constructor(private firebaseAuth: AngularFireAuth,
               private firestore: AngularFirestore) {
 
     this.firebaseAuth.authState.subscribe(user => {
@@ -109,6 +109,14 @@ export class FirebaseService {
   }
 
 
+  /**
+   * Legt eine neue Notiz in der Collection "notizensammlung" an; neben den als Argument übergebenen
+   * `titel` und `inhalt` werden noch der aktuelle Zeitstempel als Anzahl Millisekunden seit dem
+   * 1. Januar 1970 sowie die Nutzer-ID abgespeichert.
+   * 
+   * @param titel   Titel der Notiz
+   * @param inhalt  Eigentlicher Text der Notiz.
+   */
   public async neueNotizAnlegen(titel: string, inhalt: string) {
 
     let nowMillisecondsSince1970 = new Date().valueOf();
@@ -123,4 +131,16 @@ export class FirebaseService {
     console.log(`Neue Notiz wurde angelegt: ID=${documentReference.id}, Pfad=${documentReference.path}`);
   }  
 
+  /**
+   * Methode holt alle Notizen für aktuellen Nutzer.
+   */
+  public async alleNotizenHolen() {
+
+    this.firestore.collection("notizensammlung")
+                  .valueChanges({ idField: 'id' }) // https://stackoverflow.com/a/59902473
+                  .subscribe( notiz => { console.log(notiz) } );                  
+  }
+
 }
+
+

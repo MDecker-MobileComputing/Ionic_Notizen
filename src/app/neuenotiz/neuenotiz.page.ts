@@ -42,8 +42,12 @@ export class NeuenotizPage {
       return;
     }
 
-    await  this.firebaseService.neueNotizAnlegen(notizTitelTrimmed, notizBodyTrimmed);
+    // Eigentliche Einfüge-Operation
+    await this.firebaseService.neueNotizAnlegen(notizTitelTrimmed, notizBodyTrimmed);
     this.helferleinService.zeigeToast("Notiz wurde angelegt");
+
+    this.notizTitel = "";
+    this.notizBody  = "";
   }
 
 }
