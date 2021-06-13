@@ -10,7 +10,7 @@ export class Notiz {
 
 
     /**
-     * Datum der Erzeugung der Notiz, 13.6.2021.
+     * Datum der Erzeugung der Notiz, z.B "13.6.2021, 13:06 Uhr".
      *
      * @returns Datum zum Anzeigen.
      */
@@ -22,6 +22,10 @@ export class Notiz {
         const monat = date.getMonth() + 1;
         const jahr  = date.getFullYear();
 
-        return `${tag}.${monat}.${jahr}`;
+        const stunde = date.getHours();
+        const minute = date.getMinutes();
+        const minuteStr = minute < 10 ? `0${minute}` : `${minute}`;
+
+        return `${tag}.${monat}.${jahr}, ${stunde}:${minuteStr} Uhr`;
     }
 }
