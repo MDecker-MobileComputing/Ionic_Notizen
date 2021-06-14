@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { first } from 'rxjs/operators';
 import { Notiz } from './notiz';
 
@@ -177,7 +177,26 @@ export class FirebaseService {
                     }
                   } );
   }
+  
+  /** Firestore-Collection mit alle Notizen, wird bei Bedarf initialisiert. */
+  private notizenCollectionRef: AngularFirestoreCollection<Announcement> = null;
+
+  /**
+   * Einzelne Notiz anhand deren ID löschen.
+   *
+   * @param docID  ID der zu löschenden Notiz
+   */
+  public async notizLoeschen(docID: string) {
+    
+    // Lösung nach https://github.com/angular/angularfire/issues/1265#issue-265459651
+    
+    if (this.notizenCollectionRef === null) {
+      
+      this.notizenCollectionRef = this.firestore.collection("notizensammlung");
+    }
+    
+    const notizenDoc = this.notizenCollectionRef.doc(docID);
+    notizenDoc.delete();
+  }
 
 }
-
-
