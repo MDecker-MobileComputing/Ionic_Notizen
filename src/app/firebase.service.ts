@@ -172,7 +172,7 @@ export class FirebaseService {
 
                       const element = notizenArray[i];
 
-                      const notizObj = new Notiz(element["titel"], element["inhalt"], element["zeitstempel"]);
+                      const notizObj = new Notiz(element["id"], element["titel"], element["inhalt"], element["zeitstempel"]);
                       this.notizenArray.push(notizObj);
                     }
                   } );

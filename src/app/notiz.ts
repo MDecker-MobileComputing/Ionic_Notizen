@@ -4,7 +4,8 @@
  */
 export class Notiz {
 
-    constructor(public titel: string,
+    constructor(public id: string,
+                public titel: string,
                 public inhalt: string,
                 public zeitstempel: number) {}
 
