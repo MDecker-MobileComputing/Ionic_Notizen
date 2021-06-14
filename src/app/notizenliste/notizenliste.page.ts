@@ -37,7 +37,8 @@ export class NotizenlistePage implements OnInit {
    }
 
    /**
-    * Event-Handler zum Löschen einer Notiz.
+    * Event-Handler zum Löschen einer Notiz. Vor dem eigentlichen Löschen
+    * kommt eine Sicherheitsfrage.
     *
     * @param id  ID des Dokuments=Notiz, die gelöscht werden soll.
     */
@@ -53,8 +54,8 @@ export class NotizenlistePage implements OnInit {
           await this.alertCtrl.create({ header: "Sicherheitsfrage",
                                         message: "Soll diese Notiz wirklich gelöscht werden?",
                                         buttons: [
-                                            { text: "Nein", role: "cancel" },
-                                            { text: "Ja", handler: jaButtonEventHandler }
+                                            { text: "Nein", role   : "cancel" },
+                                            { text: "Ja"  , handler: jaButtonEventHandler }
                                         ]
                                       });
       await sicherheitsabfrageAlert.present();
