@@ -18,7 +18,7 @@ export class NotizenlistePage implements OnInit {
                public helferleinService: HelferleinService) {}
 
    /**
-    * Holt Liste aller Notizen.
+    * Holt Liste aller Notizen von Firestore.
     */
    public ngOnInit() {
 
@@ -35,9 +35,14 @@ export class NotizenlistePage implements OnInit {
       this.navCtrl.navigateForward("/home");
    }
 
+   /**
+    * Event-Handler zum Löschen einer Notiz.
+    *
+    * @param id  ID des Dokuments=Notiz, die gelöscht werden soll.
+    */
    public async onNotizLoeschen(id: string) {
 
-    this.helferleinService.zeigeDialog("Noch nicht fertig", "Sollte jetzt Notiz mit folgender ID löschen: " + id);
+    this.firebaseService.notizLoeschen(id);
    }
 
 }

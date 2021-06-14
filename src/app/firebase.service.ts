@@ -26,6 +26,9 @@ export class FirebaseService {
   /** Anzeigename des aktuell angemeldeten Benutzers oder leerer String. */
   public nutzername = "";
 
+  /** Firestore-Collection mit alle Notizen, wird bei Bedarf initialisiert. */
+  private notizenCollectionRef: AngularFirestoreCollection = null;
+
   /** Array mit von der DB gelesenen Notizen. */
   public notizenArray: Notiz[] = [];
 
@@ -178,8 +181,6 @@ export class FirebaseService {
                   } );
   }
 
-  /** Firestore-Collection mit alle Notizen, wird bei Bedarf initialisiert. */
-  private notizenCollectionRef: AngularFirestoreCollection = null;
 
   /**
    * Einzelne Notiz anhand deren ID löschen.
@@ -196,7 +197,9 @@ export class FirebaseService {
     }
 
     const notizenDoc = this.notizenCollectionRef.doc(docID);
-    notizenDoc.delete();
+    await notizenDoc.delete();
+
+    await this.alleNotizenHolen();
   }
 
 }

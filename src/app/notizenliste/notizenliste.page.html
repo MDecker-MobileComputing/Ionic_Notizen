@@ -22,7 +22,7 @@
         <ion-card-subtitle>Angelegt am: {{notiz.getDatumZeitErzeugung()}}</ion-card-subtitle>
       </ion-card-header>
       <ion-item>
-        <ion-button fill="outline" slot="start" color="danger" (click)="onNotizLoeschen('{{notiz.id}}')">Löschen</ion-button>
+        <ion-button fill="outline" slot="start" color="danger" (click)="onNotizLoeschen(notiz.id)">Löschen</ion-button>
       </ion-item>
       <ion-card-content>{{notiz.inhalt}}</ion-card-content>
     </ion-card>
