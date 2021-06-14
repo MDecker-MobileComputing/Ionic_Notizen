@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, AlertController } from '@ionic/angular';
 import { FirebaseService } from '../firebase.service';
 import { HelferleinService } from '../helferlein.service';
 
@@ -15,6 +15,7 @@ export class NotizenlistePage implements OnInit {
    */
    constructor(public firebaseService: FirebaseService,
                public navCtrl: NavController,
+               public alertCtrl: AlertController,
                public helferleinService: HelferleinService) {}
 
    /**
@@ -42,7 +43,21 @@ export class NotizenlistePage implements OnInit {
     */
    public async onNotizLoeschen(id: string) {
 
-    this.firebaseService.notizLoeschen(id);
+      const jaButtonEventHandler = async () => {
+
+          await this.firebaseService.notizLoeschen(id);
+          this.helferleinService.zeigeToast("Notiz wurde gelöscht.");
+      };
+
+      const sicherheitsabfrageAlert =
+          await this.alertCtrl.create({ header: "Sicherheitsfrage",
+                                        message: "Soll diese Notiz wirklich gelöscht werden?",
+                                        buttons: [
+                                            { text: "Nein", role: "cancel" },
+                                            { text: "Ja", handler: jaButtonEventHandler }
+                                        ]
+                                      });
+      await sicherheitsabfrageAlert.present();
    }
 
 }

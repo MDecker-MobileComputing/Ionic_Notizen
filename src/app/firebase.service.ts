@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { first } from 'rxjs/operators';
 import { Notiz } from './notiz';
 
@@ -196,7 +196,8 @@ export class FirebaseService {
       this.notizenCollectionRef = this.firestore.collection("notizensammlung");
     }
 
-    const notizenDoc = this.notizenCollectionRef.doc(docID);
+    const notizenDoc:AngularFirestoreDocument = this.notizenCollectionRef.doc(docID);
+    console.log(`notizenDoc=${notizenDoc.constructor.name}`);
     await notizenDoc.delete();
 
     await this.alleNotizenHolen();
