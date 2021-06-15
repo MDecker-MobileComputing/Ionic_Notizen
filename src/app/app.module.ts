@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
+import { AngularFireAnalyticsModule, ScreenTrackingService } from '@angular/fire/analytics';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
@@ -15,7 +15,7 @@ import { environment } from '../environments/environment';
  * Import von AngularFireModule nach
  * https://github.com/angular/angularfire/blob/master/docs/install-and-setup.md
  *
- * Import von AngularFireAnalyticsModule nach
+ * Import von AngularFireAnalyticsModule und ScreenTrackingService nach
  * https://github.com/angular/angularfire/blob/master/docs/analytics/getting-started.md#usage
  */
 @NgModule({
@@ -27,7 +27,7 @@ import { environment } from '../environments/environment';
             AngularFireModule.initializeApp(environment.firebase),
             AngularFireAnalyticsModule
           ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, ScreenTrackingService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
