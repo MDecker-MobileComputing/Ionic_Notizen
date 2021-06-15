@@ -10,9 +10,9 @@ import { HelferleinService } from '../helferlein.service';
 })
 export class NotizenlistePage implements OnInit {
 
-  /**
-   * Konstruktor für Dependency Injection.
-   */
+   /**
+    * Konstruktor für Dependency Injection.
+    */
    constructor(public firebaseService: FirebaseService,
                public navCtrl: NavController,
                public alertCtrl: AlertController,
@@ -50,13 +50,18 @@ export class NotizenlistePage implements OnInit {
           this.helferleinService.zeigeToast("Notiz wurde gelöscht.");
       };
 
+      const neinButtonEventHandler = async () => {
+
+        this.firebaseService.eigenesStatEventLoggen("notiz_loeschen_abgebrochen");
+      };
+
+      const jaButton   = { text: "Ja"  , handler: jaButtonEventHandler };
+      const neinButton = { text: "Nein", handler: neinButtonEventHandler, role: "cancel" }
+
       const sicherheitsabfrageAlert =
           await this.alertCtrl.create({ header: "Sicherheitsfrage",
                                         message: "Soll diese Notiz wirklich gelöscht werden?",
-                                        buttons: [
-                                            { text: "Nein", role   : "cancel" },
-                                            { text: "Ja"  , handler: jaButtonEventHandler }
-                                        ]
+                                        buttons: [ jaButton, neinButton ]
                                       });
       await sicherheitsabfrageAlert.present();
    }

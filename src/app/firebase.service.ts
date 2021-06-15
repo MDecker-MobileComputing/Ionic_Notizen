@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { first } from 'rxjs/operators';
 import { Notiz } from './notiz';
+import * as firebase from 'firebase/app';
 
 /**
  * Service-Klasse, die alle Firebase-spezifischen Funktionen (Authentifizierung, Zugriff auf Firestore) kapselt.
@@ -31,6 +32,9 @@ export class FirebaseService {
 
   /** Array mit von der DB gelesenen Notizen. */
   public notizenArray: Notiz[] = [];
+
+  /** Objekt zur Erfassung von eigenen Analytics-Events. */
+  private analytics = firebase.default.analytics();
 
 
   /**
@@ -200,6 +204,16 @@ export class FirebaseService {
     await notizenDoc.delete();
 
     await this.alleNotizenHolen();
+  }
+
+  /**
+   * Methode, um eigenes Event für Google Analytics zu loggen.
+   *
+   * @param eventName  Name des Events, z.B. "notiz_geloescht".
+   */
+  public eigenesStatEventLoggen(eventName: string) {
+
+        this.analytics.logEvent(eventName);
   }
 
 }
