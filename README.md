@@ -17,7 +17,7 @@ Create a Firebase project.
 
 Enable "Email address and password" as "sign-in method" under "Authentication".
 
-For *Firestore* the following rule has to be configured:
+For *Firestore* the following rule has to be configured (see also [this answer on SO](https://stackoverflow.com/a/55115937)):
 ```
 rules_version = '2';
 service cloud.firestore {
@@ -33,7 +33,6 @@ service cloud.firestore {
   }
 }
 ```
-Solution according to [this answer on SO](https://stackoverflow.com/a/55115937)
 
 <br>
 
