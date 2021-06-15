@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { AngularFireModule } from '@angular/fire';
+import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
@@ -9,9 +10,13 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment';
 
+
 /*
  * Import von AngularFireModule nach
  * https://github.com/angular/angularfire/blob/master/docs/install-and-setup.md
+ *
+ * Import von AngularFireAnalyticsModule nach
+ * https://github.com/angular/angularfire/blob/master/docs/analytics/getting-started.md#usage
  */
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +24,8 @@ import { environment } from '../environments/environment';
   imports: [BrowserModule,
             IonicModule.forRoot(),
             AppRoutingModule,
-            AngularFireModule.initializeApp(environment.firebase)
+            AngularFireModule.initializeApp(environment.firebase),
+            AngularFireAnalyticsModule
           ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
