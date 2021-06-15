@@ -210,10 +210,22 @@ export class FirebaseService {
    * Methode, um eigenes Event für Google Analytics zu loggen.
    *
    * @param eventName  Name des Events, z.B. "notiz_geloescht".
+   * @param attributeObj  Optionales Objekt mit Attributen.
    */
-  public eigenesStatEventLoggen(eventName: string) {
+  public eigenesStatEventLoggen(eventName: string, attributeObj = {}) {
 
-        this.analytics.logEvent(eventName);
+        const anzAttribute = Object.keys(attributeObj).length;
+
+        if (anzAttribute === 0) {
+
+            this.analytics.logEvent(eventName);
+
+        } else {
+
+            this.analytics.logEvent(eventName, attributeObj);
+        }
+
+        console.log(`Event geschrieben: ${eventName} (Anzahl Attribute: ${anzAttribute}).`);
   }
 
 }

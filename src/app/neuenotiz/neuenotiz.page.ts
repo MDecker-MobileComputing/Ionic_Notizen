@@ -18,7 +18,7 @@ export class NeuenotizPage {
 
   /**
    * Konstruktor für Dependency Injection.
-   */  
+   */
   constructor(public firebaseService: FirebaseService,
               public helferleinService: HelferleinService) { }
 
@@ -27,7 +27,7 @@ export class NeuenotizPage {
    * Button für "Notiz anlegen".
    */
   public async onNotizAnlegenButton() {
-        
+
     const notizTitelTrimmed = this.notizTitel.trim();
     if (notizTitelTrimmed.length === 0) {
 
@@ -48,6 +48,14 @@ export class NeuenotizPage {
 
     this.notizTitel = "";
     this.notizBody  = "";
+
+
+    // Custom Event für Analytics schreiben
+    const statAttribute = {
+        titelLaenge: notizTitelTrimmed.length,
+        bodyLaenge : notizBodyTrimmed.length
+    }
+    this.firebaseService.eigenesStatEventLoggen("notiz_angelegt", statAttribute);
   }
 
 }
