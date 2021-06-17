@@ -23,7 +23,7 @@ export class NotizenlistePage implements OnInit {
     */
    public ngOnInit() {
 
-    this.firebaseService.alleNotizenHolen();
+      this.firebaseService.alleNotizenHolen();
    }
 
    /**
