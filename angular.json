@@ -21,11 +21,6 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
-                "glob": "./firebase-messaging-sw.js",
-                "input": ".",
-                "output": "."
-              },
-              {
                 "glob": "**/*",
                 "input": "src/assets",
                 "output": "assets"

@@ -8,7 +8,6 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { environment } from '../environments/environment';
 
 
@@ -18,9 +17,6 @@ import { environment } from '../environments/environment';
  *
  * Import von AngularFireAnalyticsModule und ScreenTrackingService nach
  * https://github.com/angular/angularfire/blob/master/docs/analytics/getting-started.md#usage
- *
- * Import von AngularFireMessagingModule für Push-Nachrichten nach
- * https://github.com/angular/angularfire/blob/master/docs/messaging/messaging.md
  */
 @NgModule({
   declarations: [AppComponent],
@@ -29,8 +25,7 @@ import { environment } from '../environments/environment';
             IonicModule.forRoot(),
             AppRoutingModule,
             AngularFireModule.initializeApp(environment.firebase),
-            AngularFireAnalyticsModule,
-            AngularFireMessagingModule
+            AngularFireAnalyticsModule
           ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, ScreenTrackingService],
   bootstrap: [AppComponent],
