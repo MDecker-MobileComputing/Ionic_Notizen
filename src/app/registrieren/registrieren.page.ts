@@ -61,7 +61,7 @@ export class RegistrierenPage {
       this.helferlein.zeigeDialog("Ungültige Eingabe", "Kein Passwort eingegeben.");
       return;      
     }
-    if (passwort1Trimmed.length === 8) {
+    if (passwort1Trimmed.length < 8) {
 
       this.helferlein.zeigeDialog("Ungültige Eingabe", "Passwort ist kürzer als acht Zeichen.");
       return;      
