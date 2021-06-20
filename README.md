@@ -24,14 +24,15 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     match /notizensammlung/{nutzer_uid} {
-
+    
       function istAngemeldet() {
             return request.auth.uid != null;
       }
-      allow read : if istAngemeldet() && request.auth.uid == resource.data.nutzer_uid;
-      allow write: if istAngemeldet();
+      allow read  : if istAngemeldet() && request.auth.uid == resource.data.nutzer_uid;
+      allow create: if istAngemeldet() && request.auth.uid == request.resource.data.nutzer_uid;
+      allow delete: if istAngemeldet() && request.auth.uid == resource.data.nutzer_uid;
     }
-  }
+  }  
 }
 ```
 
