@@ -104,7 +104,7 @@ export class FirebaseService {
 
       const userCredential = await this.firebaseAuth.createUserWithEmailAndPassword(email, passwort);
 
-      userCredential.user.sendEmailVerification();
+      //userCredential.user.sendEmailVerification();
 
       return userCredential.user !== null;
     }
