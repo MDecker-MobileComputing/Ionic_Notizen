@@ -75,7 +75,9 @@ export class RegistrierenPage {
     const registrierungErfolgreich = this.firebaseService.registrieren(emailTrimmed, passwort1Trimmed);
     if (registrierungErfolgreich) {
 
-      this.helferlein.zeigeDialog("Erfolg", "Registrierung war erfolgreich, es wurde eine Email zur Verifikation an die angegebene Adresse geschickt.");
+      this.helferlein.zeigeDialog("Erfolg", "Die Registrierung war erfolgreich.");
+      //this.helferlein.zeigeDialog("Erfolg", 
+      //                            "Registrierung war erfolgreich, es wurde eine Email zur Verifikation an die angegebene Adresse geschickt.");
 
     } else {
 
