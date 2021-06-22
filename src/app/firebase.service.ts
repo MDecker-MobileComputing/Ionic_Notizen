@@ -178,12 +178,12 @@ export class FirebaseService {
 
                       for (let i = 0; i < ergebnisArray.length; i++) {
 
-                          const element = ergebnisArray[i];
+                          const ergebnis = ergebnisArray[i];
 
-                          const notizObj = new Notiz(element["id"], 
-                                                    element["titel"], 
-                                                    element["inhalt"], 
-                                                    element["zeitstempel"]
+                          const notizObj = new Notiz(ergebnis["id"], 
+                                                     ergebnis["titel"], 
+                                                     ergebnis["inhalt"], 
+                                                     ergebnis["zeitstempel"]
                                                     );
                           this.notizenArray.push(notizObj);
                       }
