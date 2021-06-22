@@ -31,14 +31,14 @@ export class NeuenotizPage {
     const notizTitelTrimmed = this.notizTitel.trim();
     if (notizTitelTrimmed.length === 0) {
 
-      this.helferleinService.zeigeDialog("Ungültige Eingabe", "Keinen Titel für die Notiz eingegeben.")
+      this.helferleinService.zeigeDialog("Ungültige Eingabe", "Keinen Titel für die Notiz eingegeben.");
       return;
     }
 
     const notizBodyTrimmed  = this.notizBody.trim();
     if (notizBodyTrimmed.length === 0) {
 
-      this.helferleinService.zeigeDialog("Ungültige Eingabe", "Keinen Text für die Notiz eingegeben.")
+      this.helferleinService.zeigeDialog("Ungültige Eingabe", "Keinen Text für die Notiz eingegeben.");
       return;
     }
 

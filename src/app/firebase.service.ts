@@ -173,7 +173,7 @@ export class FirebaseService {
     // Für das orderBy() muss folgender Index für die Collection "notizensammlung" angelegt werden:
     // nutzer_uid Aufsteigend zeitstempel Aufsteigend
     this.firestore.collection("notizensammlung", ref => ref.where("nutzer_uid", "==", nutzerUid)
-                  .orderBy("zeitstempel") )
+                                                           .orderBy("zeitstempel") )
                   .valueChanges( { idField: "id" } )
                   .subscribe( ergebnisArray => {
 
