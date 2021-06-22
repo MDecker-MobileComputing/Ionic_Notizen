@@ -78,6 +78,7 @@ export class FirebaseService {
    *
    * @return Promise auf bool'schen Wert; wenn `true`, dann war die Anmeldung erfolgreich.
    */
+  
   public async anmelden(email: string, passwort: string): Promise<boolean> {
 
     try {
@@ -179,7 +180,11 @@ export class FirebaseService {
 
                       const element = notizenArray[i];
 
-                      const notizObj = new Notiz(element["id"], element["titel"], element["inhalt"], element["zeitstempel"]);
+                      const notizObj = new Notiz(element["id"], 
+                                                 element["titel"], 
+                                                 element["inhalt"], 
+                                                 element["zeitstempel"]
+                                                );
                       this.notizenArray.push(notizObj);
                     }
                   } );
