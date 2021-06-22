@@ -174,19 +174,19 @@ export class FirebaseService {
     // nutzer_uid Aufsteigend zeitstempel Aufsteigend
     this.firestore.collection("notizensammlung", ref => ref.where("nutzer_uid", "==", nutzerUid).orderBy("zeitstempel") )
                   .valueChanges( { idField: "id" } )
-                  .subscribe( notizenArray => {
+                  .subscribe( ergebnisArray => {
 
-                    for (let i = 0; i < notizenArray.length; i++) {
+                      for (let i = 0; i < ergebnisArray.length; i++) {
 
-                      const element = notizenArray[i];
+                          const element = ergebnisArray[i];
 
-                      const notizObj = new Notiz(element["id"], 
-                                                 element["titel"], 
-                                                 element["inhalt"], 
-                                                 element["zeitstempel"]
-                                                );
-                      this.notizenArray.push(notizObj);
-                    }
+                          const notizObj = new Notiz(element["id"], 
+                                                    element["titel"], 
+                                                    element["inhalt"], 
+                                                    element["zeitstempel"]
+                                                    );
+                          this.notizenArray.push(notizObj);
+                      }
                   } );
   }
 
