@@ -8,6 +8,16 @@ All the Firebase-specific code is contained in [class `FirebaseService`](src/app
 
 ----
 
+## Screenshots ##
+
+<br>
+
+![Screenshot 1](screenshot_1.png)    ![Screenshot 2](screenshot_2.png)
+
+<br>
+
+----
+
 ## Firebase Configuration ##
 
 For the time being the "old" version 8.6.1 of the [Firebase library](https://www.npmjs.com/package/firebase) is used because of [this issue](https://github.com/angular/angularfire/issues/2838#issuecomment-858208215).
