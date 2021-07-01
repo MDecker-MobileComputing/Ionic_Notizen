@@ -21,7 +21,7 @@ export class RegistrierenPage {
 
   /**
    * Konstruktor für Dependency Injection.
-   */  
+   */
   constructor(public firebaseService: FirebaseService,
               public helferlein: HelferleinService) { }
 
@@ -37,11 +37,11 @@ export class RegistrierenPage {
       this.helferlein.zeigeDialog("Ungültige Eingabe", "Keine Email-Adresse eingegeben.");
       return;
     }
-    if (emailTrimmed.length === 7) {
+    if (emailTrimmed.length <= 7) {
 
       this.helferlein.zeigeDialog("Ungültige Eingabe", "Eingegebene Email-Adresse ist zu kurz.");
       return;
-    }    
+    }
     if (emailTrimmed.indexOf("@") === -1) {
 
       this.helferlein.zeigeDialog("Ungültige Eingabe", "Eingegebene Email-Adresse enthält kein \"@\".");
@@ -59,12 +59,12 @@ export class RegistrierenPage {
     if (passwort1Trimmed.length === 0) {
 
       this.helferlein.zeigeDialog("Ungültige Eingabe", "Kein Passwort eingegeben.");
-      return;      
+      return;
     }
     if (passwort1Trimmed.length < 8) {
 
       this.helferlein.zeigeDialog("Ungültige Eingabe", "Passwort ist kürzer als acht Zeichen.");
-      return;      
+      return;
     }
     if (passwort1Trimmed !== passwort2Trimmed) {
 
@@ -76,13 +76,13 @@ export class RegistrierenPage {
     if (registrierungErfolgreich) {
 
       this.helferlein.zeigeDialog("Erfolg", "Die Registrierung war erfolgreich.");
-      //this.helferlein.zeigeDialog("Erfolg", 
+      //this.helferlein.zeigeDialog("Erfolg",
       //                            "Registrierung war erfolgreich, es wurde eine Email zur Verifikation an die angegebene Adresse geschickt.");
 
     } else {
 
       this.helferlein.zeigeDialog("Fehler", "Registrierung ist fehlgeschlagen.");
-    }    
+    }
   }
 
 }
