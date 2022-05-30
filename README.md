@@ -48,7 +48,7 @@ service cloud.firestore {
 
 <br>
 
-Create an Index on collection `notizensammlung` for the following fields:
+Create an index on collection `notizensammlung` for the following fields:
 * `nutzer_uid` ascending
 * `zeitstempel` ascending
 
