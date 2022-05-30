@@ -1,5 +1,7 @@
 # Storing notes in Firestore #
 
+<br>
+
 Simple Ionic using [Firestore](https://firebase.google.com/docs/firestore/) (NoSQL database offered by [Google Firebase](https://firebase.google.com/)) to store personal notes.
 For integration of Firebase functionaliy [Angular Fire](https://github.com/angular/angularfire) is used.
 All the Firebase-specific code is contained in [class `FirebaseService`](src/app/firebase.service.ts).
