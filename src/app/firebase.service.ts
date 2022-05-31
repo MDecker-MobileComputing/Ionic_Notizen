@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
+
 import { first } from 'rxjs/operators';
 import { Notiz } from './notiz';
-import * as firebase from 'firebase/app';
+
 
 /**
  * Service-Klasse, die alle Firebase-spezifischen Funktionen (Authentifizierung, Zugriff auf Firestore) kapselt.
@@ -33,9 +35,6 @@ export class FirebaseService {
   /** Array mit von der DB gelesenen Notizen. */
   public notizenArray: Notiz[] = [];
 
-  /** Objekt zur Erfassung von eigenen Analytics-Events. */
-  private analytics = firebase.default.analytics();
-
 
   /**
    * Konstruktor für Dependency Injection.
@@ -44,7 +43,8 @@ export class FirebaseService {
    * https://www.positronx.io/ionic-firebase-authentication-tutorial-with-examples/
    */
   constructor(private firebaseAuth: AngularFireAuth,
-              private firestore: AngularFirestore) {
+              private firestore: AngularFirestore,
+              private fireAnalytics: AngularFireAnalytics) {
 
     this.firebaseAuth.authState.subscribe(user => {
 
@@ -224,11 +224,11 @@ export class FirebaseService {
 
         if (anzAttribute === 0) {
 
-            this.analytics.logEvent(eventName);
+          this.fireAnalytics.logEvent(eventName);
 
         } else {
 
-            this.analytics.logEvent(eventName, attributeObj);
+          this.fireAnalytics.logEvent(eventName, attributeObj);
         }
 
         console.log(`Event geschrieben: ${eventName} (Anzahl Attribute: ${anzAttribute}).`);

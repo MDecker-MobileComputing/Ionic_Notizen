@@ -1,5 +1,5 @@
 {
-  "name": "notizen",
+  "name": "NotizenMitFirebase",
   "integrations": {
     "capacitor": {}
   },
