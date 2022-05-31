@@ -23,7 +23,7 @@ export class RegistrierenPage {
    * Konstruktor für Dependency Injection.
    */
   constructor(public firebaseService: FirebaseService,
-              public helferlein: HelferleinService) { }
+              public helferlein: HelferleinService) {}
 
   /**
    * Event-Handler für Button "Registrieren".
