@@ -1,28 +1,22 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+
+import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environments/environment';
 
 
-/*
- * Import von AngularFireModule nach
- * https://github.com/angular/angularfire/blob/master/docs/install-and-setup.md
- */
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [],
-  imports: [BrowserModule,
-            IonicModule.forRoot(),
+  imports: [BrowserModule, 
+            IonicModule.forRoot(), 
             AppRoutingModule,
-            AngularFireModule.initializeApp(environment.firebase),
-            AngularFireAnalyticsModule
+            AngularFireModule.initializeApp(environment.firebase)
           ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

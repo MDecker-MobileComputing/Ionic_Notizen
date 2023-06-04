@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { FirebaseService } from '../firebase.service';
 import { HelferleinService } from '../helferlein.service';
@@ -72,12 +73,10 @@ export class RegistrierenPage {
       return;
     }
 
-    const registrierungErfolgreich = this.firebaseService.registrieren(emailTrimmed, passwort1Trimmed);
+    const registrierungErfolgreich = await this.firebaseService.registrieren(emailTrimmed, passwort1Trimmed);
     if (registrierungErfolgreich) {
 
       this.helferlein.zeigeDialog("Erfolg", "Die Registrierung war erfolgreich.");
-      //this.helferlein.zeigeDialog("Erfolg",
-      //                            "Registrierung war erfolgreich, es wurde eine Email zur Verifikation an die angegebene Adresse geschickt.");
 
     } else {
 

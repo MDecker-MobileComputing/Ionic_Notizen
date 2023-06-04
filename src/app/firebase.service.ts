@@ -27,13 +27,13 @@ export class FirebaseService {
   public istNutzerAngemeldet = false;
 
   /** Anzeigename des aktuell angemeldeten Benutzers oder leerer String. */
-  public nutzername = "";
+  public nutzername : string | null  = "";
 
   /** Firestore-Collection mit alle Notizen, wird bei Bedarf initialisiert. */
-  private notizenCollectionRef: AngularFirestoreCollection = null;
+  private notizenCollectionRef: AngularFirestoreCollection | null = null;
 
-  /** Array mit von der DB gelesenen Notizen. */
-  public notizenArray: Notiz[] = [];
+  /** Array mit allen von der DB gelesenen Notizen. */
+  public notizenArray: Array<Notiz> = [];
 
 
   /**
@@ -163,7 +163,9 @@ export class FirebaseService {
     // Lösung nach https://fireship.io/snippets/get-angularfire-userid-as-promise/
     const authStatePromise = this.firebaseAuth.authState.pipe( first() ).toPromise();
     const authState = await authStatePromise;
-    const nutzerUid = authState.uid;
+
+    let nutzerUid = "";
+    if (authState && authState.uid) { nutzerUid = authState.uid; }
 
     //console.log(`nutzer_uid=${nutzerUid}`);
 
@@ -171,24 +173,19 @@ export class FirebaseService {
     // der Datensätze/Dokumente zurückgegeben werden ( https://stackoverflow.com/a/59902473 ).
     //
     // Für das orderBy() muss folgender Index für die Collection "notizensammlung" angelegt werden:
-    // nutzer_uid Aufsteigend zeitstempel Aufsteigend
+    // nutzer_uid Aufsteigend, zeitstempel Aufsteigend
     this.firestore.collection("notizensammlung", ref => ref.where("nutzer_uid", "==", nutzerUid)
                                                            .orderBy("zeitstempel") )
                   .valueChanges( { idField: "id" } )
                   .subscribe( ergebnisArray => {
-
+                    
                       for (let i = 0; i < ergebnisArray.length; i++) {
 
-                          const ergebnis = ergebnisArray[i];
+                          const notizObj = ergebnisArray[i] as Notiz; // cast!
 
-                          const notizObj = new Notiz( ergebnis["id"         ], 
-                                                      ergebnis["titel"      ], 
-                                                      ergebnis["inhalt"     ], 
-                                                      ergebnis["zeitstempel"]
-                                                    );
                           this.notizenArray.push(notizObj);
-                      }
-                  } );
+                      }                      
+                  });
   }
 
 

@@ -12,10 +12,6 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'anmelden',
-    loadChildren: () => import('./anmelden/anmelden.module').then( m => m.AnmeldenPageModule)
-  },
-  {
     path: 'registrieren',
     loadChildren: () => import('./registrieren/registrieren.module').then( m => m.RegistrierenPageModule)
   },
@@ -26,6 +22,10 @@ const routes: Routes = [
   {
     path: 'neuenotiz',
     loadChildren: () => import('./neuenotiz/neuenotiz.module').then( m => m.NeuenotizPageModule)
+  },
+  {
+    path: 'anmelden',
+    loadChildren: () => import('./anmelden/anmelden.module').then( m => m.AnmeldenPageModule)
   },
 ];
 
