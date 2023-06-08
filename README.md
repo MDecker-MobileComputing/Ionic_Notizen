@@ -22,6 +22,8 @@ All the Firebase-specific code is contained in [class `FirebaseService`](src/app
 
 ## Firebase Configuration ##
 
+<br>
+
 For the time being the "old" version 8.6.1 of the [Firebase library](https://www.npmjs.com/package/firebase) is used because of [this issue](https://github.com/angular/angularfire/issues/2838#issuecomment-858208215).
 
 <br>
@@ -59,6 +61,8 @@ Create an index on collection `notizensammlung` for the following fields:
 ----
 
 ## License ##
+
+<br>
 
 See the [LICENSE file](LICENSE.md) for license rights and limitations (BSD 3-Clause License) for the files in this repository.
 
